@@ -1,0 +1,6 @@
+{
+  "name": "MindVault",
+  "description": "Private AI-powered personal memory and growth system",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

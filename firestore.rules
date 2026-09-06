@@ -1,0 +1,56 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidJournalEntry() {
+      return incoming().userId == request.auth.uid &&
+             incoming().id is string && incoming().id.size() <= 128 &&
+             incoming().title is string && incoming().title.size() <= 200 &&
+             incoming().content is string && incoming().content.size() <= 20000 &&
+             (!('mood' in incoming()) || (incoming().mood is string && incoming().mood.size() <= 50)) &&
+             (!('tags' in incoming()) || (incoming().tags is list && incoming().tags.size() <= 20)) &&
+             (!('attachments' in incoming()) || (incoming().attachments is list && incoming().attachments.size() <= 10));
+    }
+
+    // User profile sub-collection
+    match /users/{userId}/profile/{docId} {
+      allow read, write: if isOwner(userId) && isValidId(docId);
+    }
+
+    // User journal entries sub-collection
+    match /users/{userId}/entries/{entryId} {
+      allow get, list, delete: if isOwner(userId);
+      allow create: if isOwner(userId) && isValidId(entryId) && isValidJournalEntry();
+      allow update: if isOwner(userId) && isValidJournalEntry() &&
+                    incoming().userId == existing().userId &&
+                    incoming().createdAt == existing().createdAt &&
+                    incoming().id == existing().id;
+    }
+  }
+}
