@@ -326,7 +326,6 @@ mindvault/
 ├── vite.config.ts
 ├── .env.example
 └── README.md
-
 ## 💡 Why MindVault?
 
 Traditional journaling helps people record their experiences.
