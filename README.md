@@ -129,36 +129,34 @@ API credentials are kept server-side and are never intended to be exposed in the
 - Graceful AI failure handling
 - No exposure of Firebase UIDs in the interface
 
-### 🤖 How Gemini Powers MindVault
+## 🤖 How Gemini Powers MindVault
 
 Gemini is used as more than a conversational chatbot.
 
 It powers multiple parts of the MindVault experience:
-                    Journal Memory
-                          │
-                          ▼
-                  Gemini AI Analysis
-                          │
-          ┌───────────────┼───────────────┐
-          ▼               ▼               ▼
-       Emotions        Themes        Growth Signals
-          │               │               │
-          └───────────────┼───────────────┘
-                          ▼
-                  Personal Memory Layer
-                          │
-             ┌────────────┴────────────┐
-             ▼                         ▼
-       Ask My Journal            Growth Intelligence
-             │                         │
-             ▼                         ▼
-     Evidence-Grounded          Longitudinal
-          Answers                Reflection
-             │                         │
-             └────────────┬────────────┘
-                          ▼
-                  "What Changed?"
-For multimodal memories, Gemini can also process written journal content together with attached images.
+
+```mermaid
+flowchart TD
+    A[Journal Memory] --> B[Gemini AI Analysis]
+
+    B --> C[Emotions]
+    B --> D[Themes]
+    B --> E[Growth Signals]
+
+    C --> F[Personal Memory Layer]
+    D --> F
+    E --> F
+
+    F --> G[Ask My Journal]
+    F --> H[Growth Intelligence]
+
+    G --> I[Evidence-Grounded Answers]
+    H --> J[Longitudinal Reflection]
+
+    I --> K["What Changed?"]
+    J --> K
+
+    L[Written Entry + Image] --> B
 
 ### 🏗️ Architecture
                          ┌─────────────────────┐
