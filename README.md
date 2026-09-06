@@ -100,35 +100,36 @@ Users authenticate securely through Firebase Authentication.
 
 Journal entries are stored under user-specific Firestore paths:
 
-```text
+text
 /users/{userId}/entries/{entryId}
 Firestore security rules ensure that users can only access their own memories.
 
-Server-Side Authentication
+### Server-Side Authentication
 
 Protected API requests use verified Firebase ID tokens. User identity is derived from the authenticated token rather than being trusted from client-provided values.
 
-Secure AI Processing
+### Secure AI Processing
 
 Journal entries are treated as untrusted data when provided to Gemini. The AI processing layer is designed to prevent journal content from being interpreted as system instructions or commands.
 
-Private Media
+### Private Media
 
 Images are stored using private Cloudinary assets and accessed through controlled server-side flows with ownership verification.
 
-Secrets
+### Secrets
 
 API credentials are kept server-side and are never intended to be exposed in the frontend or committed to the repository.
 
-Additional Protections
-Input validation
-Rate limiting
-Ownership verification
-Cross-user access protection
-Evidence-grounded AI responses
-Graceful AI failure handling
-No exposure of Firebase UIDs in the interface
-🤖 How Gemini Powers MindVault
+### Additional Protections
+- Input validation
+- Rate limiting
+- Ownership verification
+- Cross-user access protection
+- Evidence-grounded AI responses
+- Graceful AI failure handling
+- No exposure of Firebase UIDs in the interface
+
+### 🤖 How Gemini Powers MindVault
 
 Gemini is used as more than a conversational chatbot.
 
@@ -159,7 +160,7 @@ It powers multiple parts of the MindVault experience:
                   "What Changed?"
 For multimodal memories, Gemini can also process written journal content together with attached images.
 
-🏗️ Architecture
+### 🏗️ Architecture
                          ┌─────────────────────┐
                          │      MindVault      │
                          │     Web Client      │
@@ -193,45 +194,47 @@ For multimodal memories, Gemini can also process written journal content togethe
                          │ Reflection & Growth │
                          │     Intelligence    │
                          └─────────────────────┘
-🛠️ Tech Stack
-Technology	Purpose
-React	Frontend interface
-TypeScript	Frontend and backend development
-Node.js	Backend runtime
-Google Gemini	AI analysis, multimodal understanding and reflection
-Google AI Studio	Development environment
-Firebase Authentication	Secure user authentication
-Cloud Firestore	Persistent private journal storage
-Cloudinary	Private image/media storage
-Google Cloud Run	Production deployment
-Vite	Frontend development and build tooling
-☁️ Google Cloud & Firebase Integration
+
+### 🛠️ Tech Stack
+Technology |	Purpose
+- React	| Frontend interface
+- TypeScript	| Frontend and backend development
+- Node.js |	Backend runtime
+- Google | Gemini	AI analysis, multimodal understanding and reflection
+- Google AI Studio | Development environment
+- Firebase Authentication |	Secure user authentication
+- Cloud Firestore |	Persistent private journal storage
+- Cloudinary |	Private image/media storage
+- Google Cloud Run | Production deployment
+- Vite	| Frontend development and build tooling
+  
+### ☁️ Google Cloud & Firebase Integration
 
 MindVault uses Google's ecosystem throughout the application.
 
-Firebase Authentication
+## Firebase Authentication
 
 Provides secure user authentication and identity management.
 
-Firebase Firestore
+## Firebase Firestore
 
 Stores journal memories and AI-generated insights while enforcing user-level access isolation through Firestore Security Rules.
 
-Gemini
+## Gemini
 
 Provides:
 
-Individual journal analysis
-Multimodal image understanding
-Evidence-grounded journal Q&A
-Growth intelligence
-Longitudinal comparisons
-Reflection generation
-Google Cloud Run
+- Individual journal analysis
+- Multimodal image understanding
+- Evidence-grounded journal Q&A
+- Growth intelligence
+- Longitudinal comparisons
+- Reflection generation
 
+## Google Cloud Run
 Hosts the production application and server-side API layer.
 
-🔄 Core User Flow
+### 🔄 Core User Flow
 Sign In
    │
    ▼
@@ -264,26 +267,16 @@ Text Entry      Voice Note
      ▼     ▼          ▼
     Ask   Growth   What Changed?
    Journal Insights
-🚀 Live Demo
 
-Try MindVault here:
+## ⚙️ Running Locally
+Prerequisites:
+- Node.js
+- npm
+- Firebase project
+- Gemini API access
+- Cloudinary account
 
-https://mindvault-memory-anjali.ai.studio/
-
-💻 Source Code
-
-The complete source code is available on GitHub:
-
-https://github.com/anjaliabhilashcv/mindvault
-
-⚙️ Running Locally
-Prerequisites
-Node.js
-npm
-Firebase project
-Gemini API access
-Cloudinary account
-Installation
+## Installation
 
 Clone the repository:
 
@@ -297,7 +290,8 @@ npm install
 Start the development server:
 
 npm run dev
-🔑 Environment Variables
+
+## 🔑 Environment Variables
 
 Secrets should never be committed to GitHub.
 
@@ -314,7 +308,7 @@ See .env.example for the expected configuration structure.
 
 ⚠️ Never commit real API keys, API secrets, passwords, service-account credentials, or other private credentials to the repository.
 
-📁 Project Structure
+## 📁 Project Structure
 mindvault/
 │
 ├── public/
@@ -332,7 +326,8 @@ mindvault/
 ├── vite.config.ts
 ├── .env.example
 └── README.md
-💡 Why MindVault?
+
+## 💡 Why MindVault?
 
 Traditional journaling helps people record their experiences.
 
@@ -353,7 +348,7 @@ The focus is not simply on generating AI responses.
 
 It is on making those responses personal, grounded, and connected to the user's own memories.
 
-🔮 Future Possibilities
+## 🔮 Future Possibilities
 
 Potential future directions include:
 
@@ -363,7 +358,8 @@ Timeline-based memory exploration
 More personalized reflection journeys
 Intelligent memory organization
 Additional privacy-preserving AI capabilities
-👩‍💻 Built By
+
+## 👩‍💻 Built By
 
 Anjali Abhilash
 
@@ -371,10 +367,8 @@ Built with Google Gemini, Firebase, Google Cloud, and a lot of experimentation, 
 
 ⭐ Try MindVault
 
-🌐 Live Demo:
+## 🌐 Live Demo:
 https://mindvault-memory-anjali.ai.studio/
 
-💻 GitHub:
+## 💻 GitHub:
 https://github.com/anjaliabhilashcv/mindvault
-
-**One important thing:** before committing this README, make sure your `.env` / `.env.local` files aren't being synced to GitHub. Your `.env.example` is fine; **real credentials are not.**
